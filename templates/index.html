@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌳 Pohon Keputusan Pintar</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🌳</text></svg>">
+    
+    <!-- Font yang Ditingkatkan -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Integrasi Framework & Library yang Lebih Lengkap -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.2.96/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.0/dist/full.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@1.6.0/dist/flowbite.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tippy.js@6.3.7/themes/light.css" rel="stylesheet">
+
+    <style>
+        /* Variabel Dasar dan Pengaturan */
+        :root {
+            --brand-gradient: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            --accent-gradient: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            --success-gradient: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
+            --error-gradient: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            --warning-gradient: linear-gradient(135deg, #f39c12 0%, #d35400 100%);
+            --surface-gradient: linear-gradient(135deg, #ecf0f1 0%, #bdc3c7 100%);
+            --dark-surface-gradient: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            --primary-color: #27ae60;
+            --secondary-color: #2980b9;
+            --accent-color: #e67e22;
+            --success-color: #16a085;
+            --error-color: #c0392b;
+            --text-primary: #2c3e50;
+            --text-secondary: #7f8c8d;
+            --background-light: #ecf0f1;
+        }
+
+        /* Gaya Dasar */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--surface-gradient);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background 0.3s ease;
+        }
+
+        /* Kontainer Aplikasi */
+        .app-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        /* Gaya Header */
+        .page-header {
+            background: var(--brand-gradient);
+            padding: 4rem 2rem;
+            margin: 0 auto 2rem auto;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            max-width: 1440px;
+            width: 100%;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.1' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,165.3C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: center;
+            opacity: 0.3;
+        }
+
+        .app-title {
+            font-family: 'Merriweather', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            position: relative;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .app-title::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: white;
+            border-radius: 2px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Gaya Kartu */
+        .card {
+            background: white;
+            border: none;
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            background: rgba(248, 250, 252, 0.8);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .card-header-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--brand-gradient);
+            color: white;
+            border-radius: 0.75rem;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Kontrol Formulir */
+        .form-control {
+            font-family: 'Poppins', sans-serif;
+            border-radius: 0.75rem;
+            border: 2px solid #e2e8f0;
+            padding: 1rem 1.25rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+            width: 100%;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(39, 174, 96, 0.1);
+            outline: none;
+        }
+
+        /* Grup Input */
+        .input-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .input-group:focus-within label {
+            color: var(--primary-color);
+        }
+
+        /* Gaya Tombol */
+        .btn {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            padding: 0.875rem 1.75rem;
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s ease, height 0.3s ease;
+        }
+
+        .btn:hover::after {
+            width: 200%;
+            height: 200%;
+        }
+
+        .btn-primary {
+            background: var(--brand-gradient);
+            border: none;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.5);
+        }
+
+        .btn-secondary {
+            background: white;
+            border: 2px solid #e2e8f0;
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--background-light);
+            border-color: #cbd5e1;
+            transform: translateY(-2px);
+        }
+
+        /* Kontainer Pohon */
+        .tree-container {
+            height: 600px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+        }
+
+        .tree-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            cursor: move;
+            position: relative;
+            transform-origin: top left;
+            transition: transform 0.3s ease;
+        }
+
+        .tree-controls {
+            position: absolute;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            display: flex;
+            gap: 0.75rem;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(8px);
+        }
+
+        .tree-controls button {
+            background: white;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tree-controls button:hover {
+            background: var(--background-light);
+            transform: translateY(-2px);
+        }
+
+        /* Grid Metrik */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .metric-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .metric-value {
+            font-family: 'Merriweather', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        /* Kontainer Log */
+        .logs-container {
+            background: #2c3e50;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            font-family: 'Roboto Mono', monospace;
+            position: relative;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        }
+
+        .logs-content {
+            max-height: 400px;
+            overflow-y: auto;
+            color: #ecf0f1;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .log-entry {
+            margin: 0.25rem 0;
+            padding: 0.5rem;
+            border-bottom: 1px solid #34495e;
+            font-family: 'Roboto Mono', monospace;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .log-entry[data-type="info"] { color: #3498db; }
+        .log-entry[data-type="success"] { color: #2ecc71; }
+        .log-entry[data-type="warning"] { color: #f1c40f; }
+        .log-entry[data-type="error"] { color: #e74c3c; }
+        .log-entry[data-type="calc"] { color: #9b59b6; }
+        .log-entry[data-type="gain"] { color: #1abc9c; }
+        .log-entry[data-type="entropy"] { color: #95a5a6; }
+        .log-entry[data-type="result"] { color: #ecf0f1; }
+        .log-entry[data-type="metric"] { color: #3498db; }
+        .log-entry[data-type="split"] { color: #2ecc71; }
+
+        .log-entry .feature { color: #3498db; }
+        .log-entry .value { color: #f39c12; }
+        .log-entry .metric { color: #1abc9c; }
+        .log-entry .percentage { color: #e74c3c; }
+
+        .log-timestamp {
+            color: #95a5a6;
+            margin-right: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .feature-importance-bar {
+            background: var(--brand-gradient);
+            height: 0.5rem;
+            border-radius: 9999px;
+            transition: width 1s ease-out, background 0.3s ease;
+        }
+
+        .feature-importance-bar:hover {
+            background: var(--accent-gradient);
+        }
+
+        /* Notifikasi Toast */
+        .toast {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            background: white;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+                        0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            z-index: 50;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+
+        .toast.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Status Loading */
+        .loading-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(4px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            z-index: 20;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e2e8f0;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Scrollbar Kustom */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #e5e7eb;
+            border-radius: 3px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #9ca3af;
+            border-radius: 3px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #6b7280;
+        }
+
+        /* Animasi */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-10px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Desain Responsif */
+        @media (max-width: 768px) {
+            .app-container {
+                padding: 1rem;
+            }
+
+            .app-title {
+                font-size: 2.5rem;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tree-controls {
+                bottom: 1rem;
+                right: 1rem;
+                padding: 0.5rem;
+            }
+
+            .card {
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Mode Gelap */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: var(--dark-surface-gradient);
+                color: #ecf0f1;
+            }
+
+            .card {
+                background: rgba(52, 73, 94, 0.9);
+            }
+
+            .form-control {
+                background: #34495e;
+                border-color: #7f8c8d;
+                color: #ecf0f1;
+            }
+
+            .input-group label {
+                color: #bdc3c7;
+            }
+
+            .btn-secondary {
+                background: #34495e;
+                border-color: #7f8c8d;
+                color: #ecf0f1;
+            }
+
+            .metric-card {
+                background: #34495e;
+            }
+        }
+
+        /* Gaya Tabel */
+        .table-container {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 1rem;
+            border-radius: 0.5rem;
+            background: white;
+            border: 1px solid #e2e8f0;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+
+        .data-table th {
+            position: sticky;
+            top: 0;
+            background: var(--brand-gradient);
+            color: white;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        .data-table th:first-child {
+            text-align: center;
+            width: 50px;
+        }
+
+        .data-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .data-table td:first-child {
+            background-color: #f8fafc;
+            font-weight: 500;
+            text-align: center;
+            width: 50px;
+        }
+
+        .data-table tbody tr:hover {
+            background-color: #f8fafc;
+        }
+
+        .data-table tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        .data-table tbody tr:nth-child(even):hover {
+            background-color: #f1f5f9;
+        }
+
+        .footer {
+            background: var(--brand-gradient);
+            padding: 1.5rem 2rem;
+            margin: 2rem auto 0 auto;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1), 0 -2px 4px -1px rgba(0, 0, 0, 0.06);
+            max-width: 1440px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-content {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .footer-text {
+            font-family: 'Merriweather', serif;
+            font-size: 1rem;
+            font-weight: 500;
+            margin: 0;
+            padding: 0;
+            white-space: nowrap;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .social-link {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            opacity: 0.8;
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+
+        /* Footer responsif */
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        /* Animasi Daun Jatuh */
+        .falling-leaves {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .leaf {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%2327ae60" d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"/></svg>') no-repeat center center;
+            animation: falling 5s infinite linear;
+        }
+
+        @keyframes falling {
+            0% {
+                transform: translate(0, -10vh) rotate(0deg);
+            }
+            100% {
+                transform: translate(100vw, 110vh) rotate(720deg);
+            }
+        }
+
+        /* Gaya untuk Tooltip */
+        .tippy-box[data-theme~='nature'] {
+            background-color: #27ae60;
+            color: white;
+        }
+
+        .tippy-box[data-theme~='nature'][data-placement^='top'] > .tippy-arrow::before {
+            border-top-color: #27ae60;
+        }
+
+        .tippy-box[data-theme~='nature'][data-placement^='bottom'] > .tippy-arrow::before {
+            border-bottom-color: #27ae60;
+        }
+
+        .tippy-box[data-theme~='nature'][data-placement^='left'] > .tippy-arrow::before {
+            border-left-color: #27ae60;
+        }
+
+        .tippy-box[data-theme~='nature'][data-placement^='right'] > .tippy-arrow::before {
+            border-right-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header class="page-header text-center mb-6">
+            <h1 class="app-title animate__animated animate__fadeInDown">
+                🌳 Pohon Keputusan Pintar
+            </h1>
+            <p class="text-lg text-white animate__animated animate__fadeInUp">
+                Bangun dan visualisasikan pohon keputusan Anda
+            </p>
+        </header>
+
+        <main class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Kolom Kiri -->
+            <div class="space-y-6">
+                <!-- Kartu Dataset -->
+                <div class="card p-4" data-aos="fade-up">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
+                        <i class="fas fa-database text-primary-color"></i>
+                        Dataset
+                    </h2>
+                    <div class="flex justify-between mb-4">
+                        <div class="flex items-center gap-2 flex-grow mr-2">
+                            <label for="datasetName" class="font-medium">NAMA DATASET:</label>
+                            <input type="text" id="datasetName" class="form-control" data-tippy-content="Masukkan nama unik untuk dataset Anda">
+                        </div>
+                        <button onclick="saveDataset()" class="btn btn-primary" data-tippy-content="Simpan dataset saat ini">
+                            <i class="fas fa-save"></i> Simpan
+                        </button>
+                    </div>
+                    <div class="input-group">
+                        <label for="datasetSelect">Pilih Dataset:</label>
+                        <select id="datasetSelect" class="form-control" onchange="loadDataset()" data-tippy-content="Pilih dataset yang tersimpan">
+                            <option value="">-- Pilih Dataset --</option>
+                            {% for dataset in datasets %}
+                            <option value="{{ dataset.id }}">{{ dataset.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="flex justify-end mt-4">
+                        <button onclick="updateDataset()" class="btn btn-secondary mr-2" data-tippy-content="Perbarui dataset yang dipilih">
+                            <i class="fas fa-edit"></i> Perbarui
+                        </button>
+                        <button onclick="deleteDataset()" class="btn btn-secondary" data-tippy-content="Hapus dataset yang dipilih">
+                            <i class="fas fa-trash"></i> Hapus
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Kartu Parameter -->
+                <div class="card p-4" data-aos="fade-up" data-aos-delay="100">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
+                        <i class="fas fa-cogs text-primary-color"></i>
+                        Parameter
+                    </h2>
+                    <div class="input-group">
+                        <label for="parameters">Daftar Parameter:</label>
+                        <input type="text" id="parameters" class="form-control" 
+                            placeholder="contoh: cuaca, suhu, kelembaban, bermain"
+                            data-tippy-content="Masukkan parameter yang dipisahkan koma. Parameter terakhir akan menjadi variabel target.">
+                    </div>
+                    <div class="text-sm text-text-secondary mt-2">
+                        Masukkan parameter yang dipisahkan koma. Parameter terakhir akan menjadi variabel target.
+                    </div>
+                </div>
+
+                <!-- Kartu Data Pelatihan -->
+                <div class="card p-4" data-aos="fade-up" data-aos-delay="200">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
+                        <i class="fas fa-table text-primary-color"></i>
+                        Data Pelatihan
+                    </h2>
+                    <div class="input-group">
+                        <label for="trainingData">Dataset Pelatihan:</label>
+                        <textarea id="trainingData" rows="8" class="form-control custom-scrollbar"
+                            placeholder="Masukkan satu data per baris, dipisahkan koma"
+                            data-tippy-content="Masukkan data pelatihan Anda di sini. Satu baris untuk setiap data."></textarea>
+                    </div>
+                    <div class="flex justify-between mt-4">
+                        <button onclick="buildTree()" class="btn btn-primary" data-tippy-content="Mulai membangun pohon keputusan">
+                            <i class="fas fa-play"></i>
+                            Bangun Pohon
+                        </button>
+                        <button onclick="insertExampleData()" class="btn btn-secondary" data-tippy-content="Muat data contoh untuk mencoba">
+                            <i class="fas fa-lightbulb"></i>
+                            Muat Contoh
+                        </button>
+                    </div>
+                </div>
+                <!-- Kartu Pratinjau Data -->
+                <div class="card p-4" data-aos="fade-up" data-aos-delay="300">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
+                        <i class="fas fa-eye text-primary-color"></i>
+                        Pratinjau Data
+                    </h2>
+                    <div class="table-container">
+                        <table class="data-table" id="dataPreviewTable">
+                            <thead>
+                                <tr id="tableHeader">
+                                    <!-- Header akan ditambahkan secara dinamis -->
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                                <!-- Baris data akan ditambahkan secara dinamis -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kolom Kanan -->
+            <div class="space-y-6">
+                <!-- Kartu Visualisasi Pohon -->
+                <div class="card p-4" data-aos="fade-up">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
+                        <i class="fas fa-project-diagram text-primary-color"></i>
+                        Visualisasi Pohon
+                    </h2>
+                    <div class="tree-container">
+                        <img id="treeVisualization" class="tree-image" alt="Visualisasi Pohon Keputusan">
+                        <div class="tree-controls">
+                            <button onclick="zoomIn()" class="btn btn-secondary" data-tippy-content="Perbesar">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                            <button onclick="zoomOut()" class="btn btn-secondary" data-tippy-content="Perkecil">
+                                <i class="fas fa-search-minus"></i>
+                            </button>
+                            <button onclick="resetZoom()" class="btn btn-secondary" data-tippy-content="Reset zoom">
+                                <i class="fas fa-compress-arrows-alt"></i>
+                            </button>
+                            <button onclick="downloadTree()" class="btn btn-secondary" data-tippy-content="Unduh gambar pohon">
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kartu Metrik -->
+                <div class="card p-4" data-aos="fade-up" data-aos-delay="100">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
+                        <i class="fas fa-chart-bar text-primary-color"></i>
+                        Metrik Pohon
+                    </h2>
+                    <div id="metrics" class="metrics-grid">
+                        <!-- Metrik akan dimasukkan di sini -->
+                    </div>
+                </div>
+
+                <!-- Kartu Log Pembangunan -->
+                <div class="card p-4" data-aos="fade-up" data-aos-delay="200">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
+                        <i class="fas fa-terminal text-primary-color"></i>
+                        Log Pembangunan
+                    </h2>
+                    <div class="logs-container">
+                        <div id="buildLogs" class="logs-content custom-scrollbar">
+                            <!-- Log akan dimasukkan di sini -->
+                        </div>
+                        <div class="logs-actions mt-2">
+                            <button onclick="clearLogs()" class="btn btn-secondary mr-2" data-tippy-content="Bersihkan semua log">
+                                <i class="fas fa-trash-alt"></i> Bersihkan
+                            </button>
+                            <button onclick="copyLogs()" class="btn btn-secondary mr-2" data-tippy-content="Salin log ke clipboard">
+                                <i class="fas fa-copy"></i> Salin
+                            </button>
+                            <button onclick="downloadLogs()" class="btn btn-secondary" data-tippy-content="Unduh log sebagai file teks">
+                                <i class="fas fa-download"></i> Simpan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Tambahkan footer setelah konten utama -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-text">
+                    Aprido Ilham © 2024
+                </div>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/aprido-ilham-900344253/" target="_blank" class="social-link" title="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://www.instagram.com/apridoilham" target="_blank" class="social-link" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://github.com/ApridoIlham29" target="_blank" class="social-link" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Notifikasi Toast -->
+    <div id="toast" class="toast">
+        <i class="fas fa-info-circle"></i>
+        <span id="toastMessage"></span>
+    </div>
+
+    <!-- Animasi Daun Jatuh -->
+    <div class="falling-leaves"></div>
+
+    <!-- Import Script -->
+    <script src="https://cdn.jsdelivr.net/npm/daisyui@2.51.0/dist/full.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@1.6.0/dist/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+
+    <!-- Inisialisasi AOS -->
+    <script>
+        AOS.init({
+            duration: 800,
+            offset: 100,
+            once: true
+        });
+    </script>
+
+    <!-- Script Aplikasi Utama -->
+    <script>
+        // Variabel global
+        let currentZoom = 1;
+        const zoomStep = 0.1;
+        let buildLogsHistory = [];
+        let isDragging = false;
+        let currentX;
+        let currentY;
+        let initialX;
+        let initialY;
+        let xOffset = 0;
+        let yOffset = 0;
+
+        // Fungsi notifikasi toast
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            toast.className = `toast toast-${type}`;
+            toastMessage.textContent = message;
+            
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Fungsi log
+        function addLogEntry(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            
+            message = message.replace(
+                /(fitur|Gain|entropi|Nilai) ['']([^'']+)['']:/g, 
+                `$1 <span class="value">'$2'</span>:`
+            );
+            
+            message = message.replace(
+                /(\d+\.\d+)%?/g,
+                `<span class="percentage">$1</span>${message.includes('%') ? '%' : ''}`
+            );
+            
+            let messageType = type;
+            if (message.includes('Menghitung Gain')) messageType = 'calc';
+            else if (message.includes('Gain untuk fitur')) messageType = 'gain';
+            else if (message.includes('Entropi total')) messageType = 'entropy';
+            else if (message.includes('Fitur terbaik')) messageType = 'result';
+            else if (message.includes('sampel')) messageType = 'metric';
+            else if (message.includes('Split:')) messageType = 'split';
+            
+            buildLogsHistory.push({ message, type: messageType, timestamp });
+            updateLogsDisplay();
+        }
+
+        function updateLogsDisplay() {
+            const logsContainer = document.getElementById('buildLogs');
+            logsContainer.innerHTML = buildLogsHistory
+                .map(log => `
+                    <div class="log-entry" data-type="${log.type}">
+                        <span class="log-timestamp">${log.timestamp}</span>
+                        ${log.message}
+                    </div>
+                `)
+                .join('');
+            
+            logsContainer.scrollTop = logsContainer.scrollHeight;
+        }
+
+        function clearLogs() {
+            buildLogsHistory = [];
+            updateLogsDisplay();
+            showToast('Log pembangunan dibersihkan', 'info');
+        }
+
+        function copyLogs() {
+            const logsText = buildLogsHistory
+                .map(log => `[${log.timestamp}] ${log.message}`)
+                .join('\n');
+            
+            navigator.clipboard.writeText(logsText)
+                .then(() => showToast('Log disalin ke clipboard', 'success'))
+                .catch(() => showToast('Gagal menyalin log', 'error'));
+        }
+
+        function downloadLogs() {
+            const logsText = buildLogsHistory
+                .map(log => `[${log.timestamp}] ${log.message}`)
+                .join('\n');
+            
+            const blob = new Blob([logsText], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `log-pembangunan-pohon-keputusan-${new Date().toISOString().slice(0,10)}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showToast('Log berhasil diunduh', 'success');
+        }
+
+        // Fungsi visualisasi pohon
+        function zoomIn() {
+            currentZoom = Math.min(currentZoom + zoomStep, 3);
+            applyZoom();
+        }
+
+        function zoomOut() {
+            currentZoom = Math.max(currentZoom - zoomStep, 0.5);
+            applyZoom();
+        }
+
+        function resetZoom() {
+            currentZoom = 1;
+            xOffset = 0;
+            yOffset = 0;
+            applyZoom();
+        }
+
+        function applyZoom() {
+            const img = document.getElementById('treeVisualization');
+            img.style.transform = `translate(${xOffset}px, ${yOffset}px) scale(${currentZoom})`;
+        }
+
+        function downloadTree() {
+            const img = document.getElementById('treeVisualization');
+            if (img.src) {
+                const a = document.createElement('a');
+                a.href = img.src;
+                a.download = 'pohon-keputusan.png';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                showToast('Gambar pohon berhasil diunduh!', 'success');
+            } else {
+                showToast('Tidak ada visualisasi pohon yang tersedia', 'error');
+            }
+        }
+
+        // Fungsi utama membangun pohon
+        async function buildTree() {
+            const parameters = document.getElementById('parameters').value;
+            const data = document.getElementById('trainingData').value;
+            
+            if (!parameters.trim() || !data.trim()) {
+                showToast('Mohon isi semua kolom yang diperlukan', 'error');
+                addLogEntry('Pembangunan gagal: Kolom yang diperlukan kosong', 'error');
+                return;
+            }
+
+            addLogEntry('Memulai proses pembangunan pohon...', 'info');
+            addLogEntry(`Parameter: ${parameters}`, 'info');
+            addLogEntry(`Ukuran dataset: ${data.split('\n').length} data`, 'info');
+
+            const loadingOverlay = document.createElement('div');
+            loadingOverlay.className = 'loading-overlay';
+            loadingOverlay.innerHTML = '<div class="loading-spinner"></div>';
+            document.querySelector('.tree-container').appendChild(loadingOverlay);
+
+            try {
+                addLogEntry('Mengirim permintaan ke server...', 'info');
+                
+                const response = await fetch('/build_tree', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        parameters,
+                        data,
+                        options: {
+                            minSamplesSplit: 2,
+                            maxDepth: 10,
+                            criterion: 'gini'
+                        }
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.error) {
+                    addLogEntry(`Pembangunan gagal: ${result.error}`, 'error');
+                    showToast(result.error, 'error');
+                    return;
+                }
+
+                if (result.logs && Array.isArray(result.logs)) {
+                    result.logs.forEach(log => addLogEntry(log, 'info'));
+                }
+
+                const treeVisualization = document.getElementById('treeVisualization');
+                treeVisualization.src = `data:image/png;base64,${result.visualization}`;
+                resetZoom();
+                
+                addLogEntry('Visualisasi pohon diperbarui', 'success');
+                updateMetrics(result.metrics);
+                addLogEntry('Metrik diperbarui', 'success');
+                
+                addLogEntry('Pembangunan pohon berhasil', 'success');
+                showToast('Pohon keputusan berhasil dibangun!', 'success');
+                
+            } catch (error) {
+                addLogEntry(`Error membangun pohon: ${error.message}`, 'error');
+                showToast('Error membangun pohon: ' + error.message, 'error');
+            } finally {
+                document.querySelector('.loading-overlay').remove();
+            }
+        }
+
+        // Fungsi pembaruan metrik
+        function updateMetrics(metrics) {
+            const metricsContainer = document.getElementById('metrics');
+            const parameters = document.getElementById('parameters').value.split(',');
+            const features = parameters.slice(0, -1);
+            const target = parameters[parameters.length - 1];
+            
+            const createdDate = new Date(metrics.created_at);
+            const formattedDate = createdDate.toLocaleDateString('id-ID', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+            const formattedTime = createdDate.toLocaleTimeString('id-ID');
+
+            const metricCards = [
+                {
+                    icon: 'fa-calendar',
+                    title: 'Dibuat',
+                    value: `${formattedDate} ${formattedTime}`
+                },
+                {
+                    icon: 'fa-clock',
+                    title: 'Waktu Pembangunan',
+                    value: `${metrics.build_time.toFixed(2)}d`
+                },
+                {
+                    icon: 'fa-list',
+                    title: 'Fitur',
+                    value: `${features.join(', ')}`
+                },
+                {
+                    icon: 'fa-bullseye',
+                    title: 'Variabel Target',
+                    value: target
+                }
+            ];
+
+            let html = metricCards.map(card => `
+                <div class="metric-card">
+                    <div class="flex items-center gap-2">
+                        <i class="fas ${card.icon} text-primary-color"></i>
+                        <span class="text-sm font-medium">${card.title}</span>
+                    </div>
+                    <div class="metric-value">${card.value}</div>
+                </div>
+            `).join('');
+
+            if (metrics.feature_importance) {
+                html += `
+                    <div class="metric-card col-span-full">
+                        <div class="flex items-center gap-2 mb-3">
+                            <i class="fas fa-chart-pie text-primary-color"></i>
+                            <span class="text-lg font-semibold">Kepentingan Fitur</span>
+                        </div>
+                        <canvas id="featureImportanceChart"></canvas>
+                    </div>
+                `;
+            }
+
+            metricsContainer.innerHTML = html;
+        }
+
+        // Fungsi dataset
+        async function saveDataset() {
+            const name = document.getElementById('datasetName').value;
+            const parameters = document.getElementById('parameters').value;
+            const data = document.getElementById('trainingData').value;
+
+            if (!name || !parameters || !data) {
+                showToast('Mohon isi semua kolom', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch('/save_dataset', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name,
+                        parameters: parameters.split(',').map(p => p.trim()),
+                        data: data.trim().split('\n').map(row => row.trim().split(','))
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.error) {
+                    showToast(result.error, 'error');
+                } else {
+                    showToast('Dataset berhasil disimpan', 'success');
+                    location.reload();
+                }
+            } catch (error) {
+                showToast('Error menyimpan dataset: ' + error.message, 'error');
+            }
+        }
+
+        async function loadDataset() {
+            const datasetSelect = document.getElementById('datasetSelect');
+            const datasetId = datasetSelect.value;
+
+            if (!datasetId) {
+                document.getElementById('datasetName').value = '';
+                document.getElementById('parameters').value = '';
+                document.getElementById('trainingData').value = '';
+                return;
+            }
+
+            try {
+                const response = await fetch(`/load_dataset/${datasetId}`);
+                const result = await response.json();
+
+                if (result.error) {
+                    showToast(result.error, 'error');
+                } else {
+                    document.getElementById('datasetName').value = result.name;
+                    document.getElementById('parameters').value = result.parameters.join(', ');
+                    document.getElementById('trainingData').value = result.data.map(row => row.join(',')).join('\n');
+                    showToast('Dataset berhasil dimuat', 'success');
+                }
+            } catch (error) {
+                showToast('Error memuat dataset: ' + error.message, 'error');
+            }
+        }
+
+        async function updateDataset() {
+            const datasetSelect = document.getElementById('datasetSelect');
+            const datasetId = datasetSelect.value;
+
+            if (!datasetId) {
+                showToast('Mohon pilih dataset untuk diperbarui', 'error');
+                return;
+            }
+
+            const name = document.getElementById('datasetName').value;
+            const parameters = document.getElementById('parameters').value;
+            const data = document.getElementById('trainingData').value;
+
+            try {
+                const response = await fetch(`/update_dataset/${datasetId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name,
+                        parameters: parameters.split(',').map(p => p.trim()),
+                        data: data.trim().split('\n').map(row => row.trim().split(','))
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.error) {
+                    showToast(result.error, 'error');
+                } else {
+                    showToast('Dataset berhasil diperbarui', 'success');
+                }
+            } catch (error) {
+                showToast('Error memperbarui dataset: ' + error.message, 'error');
+            }
+        }
+
+        async function deleteDataset() {
+            const datasetSelect = document.getElementById('datasetSelect');
+            const datasetId = datasetSelect.value;
+
+            if (!datasetId) {
+                showToast('Mohon pilih dataset untuk dihapus', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`/delete_dataset/${datasetId}`, {
+                    method: 'DELETE'
+                });
+
+                const result = await response.json();
+
+                if (result.error) {
+                    showToast(result.error, 'error');
+                } else {
+                    showToast('Dataset berhasil dihapus', 'success');
+                    location.reload();
+                }
+            } catch (error) {
+                showToast('Error menghapus dataset: ' + error.message, 'error');
+            }
+        }
+
+        // Fungsi data contoh
+        function insertExampleData() {
+            document.getElementById('parameters').value = 'cuaca,suhu,kelembaban,bermain';
+            document.getElementById('trainingData').value = 
+                'cerah,panas,tinggi,tidak\n' +
+                'cerah,panas,rendah,ya\n' +
+                'mendung,panas,tinggi,ya\n' +
+                'hujan,sedang,tinggi,ya\n' +
+                'hujan,dingin,normal,ya\n' +
+                'hujan,dingin,normal,tidak\n' +
+                'mendung,dingin,normal,ya';
+            
+            showToast('Data contoh berhasil dimuat', 'success');
+            addLogEntry('Data contoh dimuat', 'info');
+        }
+
+        // Fungsionalitas drag visualisasi pohon
+        const treeImage = document.getElementById('treeVisualization');
+
+        function dragStart(e) {
+            initialX = e.clientX - xOffset;
+            initialY = e.clientY - yOffset;
+
+            if (e.target === treeImage) {
+                isDragging = true;
+            }
+        }
+
+        function dragEnd() {
+            initialX = currentX;
+            initialY = currentY;
+            isDragging = false;
+        }
+
+        function drag(e) {
+            if (isDragging) {
+                e.preventDefault();
+                currentX = e.clientX - initialX;
+                currentY = e.clientY - initialY;
+                xOffset = currentX;
+                yOffset = currentY;
+                setTranslate(currentX, currentY, treeImage);
+            }
+        }
+
+        function setTranslate(xPos, yPos, el) {
+            el.style.transform = `translate(${xPos}px, ${yPos}px) scale(${currentZoom})`;
+        }
+
+        // Fungsi untuk memperbarui tabel data
+        function updateDataTable() {
+            const parameters = document.getElementById('parameters').value;
+            const data = document.getElementById('trainingData').value;
+        
+            if (!parameters || !data) {
+                // Bersihkan tabel jika tidak ada data
+                const tableHeader = document.getElementById('tableHeader');
+                const tableBody = document.getElementById('tableBody');
+                tableHeader.innerHTML = '';
+                tableBody.innerHTML = '';
+                return;
+            }
+        
+            // Parse parameter
+            const headers = parameters.split(',').map(param => param.trim());
+        
+            // Parse data
+            const rows = data.split('\n')
+                .filter(row => row.trim()) // Hapus baris kosong
+                .map(row => row.split(',').map(cell => cell.trim()));
+        
+            // Perbarui header tabel hanya jika ada data
+            const tableHeader = document.getElementById('tableHeader');
+            if (rows.length > 0) {
+                tableHeader.innerHTML = `
+                    <th style="width: 50px;">No</th>
+                    ${headers.map(header => `<th>${header}</th>`).join('')}
+                `;
+            }
+        
+            // Perbarui body tabel
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = rows
+                .map((row, index) => `
+                    <tr>
+                        <td style="text-align: center;">${index + 1}</td>
+                        ${row.map(cell => `<td>${cell}</td>`).join('')}
+                    </tr>
+                `)
+                .join('');
+        }
+
+        // Tambahkan event listener untuk memperbarui tabel saat data berubah
+        document.getElementById('parameters').addEventListener('input', updateDataTable);
+        document.getElementById('trainingData').addEventListener('input', updateDataTable);
+
+        // Perbarui tabel saat data contoh dimuat
+        const originalInsertExampleData = window.insertExampleData;
+        window.insertExampleData = function() {
+            originalInsertExampleData();
+            updateDataTable();
+        };
+
+        // Perbarui tabel saat dataset dimuat
+        const originalLoadDataset = window.loadDataset;
+        window.loadDataset = async function() {
+            await originalLoadDataset();
+            updateDataTable();
+        };
+
+        // Event Listener
+        treeImage.addEventListener('mousedown', dragStart);
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', dragEnd);
+        document.addEventListener('mouseleave', dragEnd);
+
+        // Pintasan keyboard
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                e.preventDefault();
+                buildTree();
+            }
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'E') {
+                e.preventDefault();
+                insertExampleData();
+            }
+            if ((e.ctrlKey || e.metaKey) && e.code === 'Equal') { // Handle tombol Plus (+)
+                e.preventDefault();
+                zoomIn();
+            }
+            if ((e.ctrlKey || e.metaKey) && e.code === 'Minus') { // Handle tombol Minus (-)
+                e.preventDefault();
+                zoomOut();
+            }
+            if ((e.ctrlKey || e.metaKey) && e.code === 'Digit0') { // Handle tombol Nol (0)
+                e.preventDefault();
+                resetZoom();
+            }
+        });
+
+        // Fungsi penyimpanan lokal
+        function saveToLocalStorage() {
+            const parameters = document.getElementById('parameters').value;
+            const trainingData = document.getElementById('trainingData').value;
+            const datasetName = document.getElementById('datasetName').value;
+            
+            localStorage.setItem('dtb-parameters', parameters);
+            localStorage.setItem('dtb-training-data', trainingData);
+            localStorage.setItem('dtb-dataset-name', datasetName);
+        }
+
+        // Inisialisasi tooltip
+        tippy('[data-tippy-content]', {
+            theme: 'nature',
+            animation: 'scale',
+        });
+
+        // Timer penyimpanan otomatis
+        setInterval(saveToLocalStorage, 30000);
+
+        // Inisialisasi saat memuat
+        window.addEventListener('load', () => {
+            // Bersihkan semua kolom saat inisialisasi
+            document.getElementById('datasetName').value = '';
+            document.getElementById('parameters').value = '';
+            document.getElementById('trainingData').value = '';
+            
+            // Reset pilihan dataset ke opsi default
+            const datasetSelect = document.getElementById('datasetSelect');
+            if (datasetSelect) {
+                datasetSelect.selectedIndex = 0;
+            }
+
+            addLogEntry('Aplikasi berhasil diinisialisasi', 'success');
+
+            // Tambahkan animasi daun jatuh
+            createFallingLeaves();
+        });
+
+        // Fungsi untuk membuat animasi daun jatuh
+        function createFallingLeaves() {
+            const leavesContainer = document.querySelector('.falling-leaves');
+            const numberOfLeaves = 20;
+
+            for (let i = 0; i < numberOfLeaves; i++) {
+                const leaf = document.createElement('div');
+                leaf.classList.add('leaf');
+                leaf.style.left = `${Math.random() * 100}vw`;
+                leaf.style.animationDuration = `${Math.random() * 5 + 5}s`;
+                leaf.style.animationDelay = `${Math.random() * 5}s`;
+                leavesContainer.appendChild(leaf);
+            }
+        }
+
+        // Fungsi untuk memperbarui tema berdasarkan preferensi sistem
+        function updateTheme() {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.body.classList.add('dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+            }
+        }
+
+        // Panggil updateTheme saat halaman dimuat dan saat preferensi berubah
+        window.matchMedia('(prefers-color-scheme: dark)').addListener(updateTheme);
+        updateTheme();
+
+        // Fungsi untuk menampilkan panduan pengguna
+        function showUserGuide() {
+            const steps = [
+                {
+                    element: '#parameters',
+                    title: 'Masukkan Parameter',
+                    intro: 'Masukkan parameter yang dipisahkan koma. Parameter terakhir adalah variabel target.'
+                },
+                {
+                    element: '#trainingData',
+                    title: 'Masukkan Data Pelatihan',
+                    intro: 'Masukkan data pelatihan Anda, satu baris per data, dipisahkan koma.'
+                },
+                {
+                    element: 'button[onclick="buildTree()"]',
+                    title: 'Bangun Pohon',
+                    intro: 'Klik di sini untuk membangun pohon keputusan berdasarkan data Anda.'
+                },
+                {
+                    element: '#treeVisualization',
+                    title: 'Visualisasi Pohon',
+                    intro: 'Pohon keputusan Anda akan ditampilkan di sini setelah dibangun.'
+                },
+                {
+                    element: '#metrics',
+                    title: 'Metrik Pohon',
+                    intro: 'Lihat berbagai metrik terkait pohon keputusan Anda di sini.'
+                },
+                {
+                    element: '#buildLogs',
+                    title: 'Log Pembangunan',
+                    intro: 'Lihat log detail dari proses pembangunan pohon di sini.'
+                }
+            ];
+
+            introJs().setOptions({
+                steps: steps,
+                nextLabel: 'Selanjutnya',
+                prevLabel: 'Sebelumnya',
+                doneLabel: 'Selesai',
+                exitOnOverlayClick: false,
+                exitOnEsc: false,
+                showStepNumbers: false,
+                showBullets: false,
+                showProgress: true
+            }).start();
+        }
+
+        // Inisialisasi chart untuk visualisasi kepentingan fitur
+        function initFeatureImportanceChart(data) {
+            const canvas = document.getElementById('featureImportanceChart');
+            if (!canvas) {
+                console.error('Elemen canvas tidak ditemukan');
+                return;
+            }
+        
+            const ctx = canvas.getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(data),
+                    datasets: [{
+                        label: 'Kepentingan Fitur',
+                        data: Object.values(data),
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 1
+                        }
+                    }
+                }
+            });
+        }
+
+        // Perbarui fungsi updateMetrics untuk menambahkan chart
+        function updateMetrics(metrics) {
+            const metricsContainer = document.getElementById('metrics');
+            const parameters = document.getElementById('parameters').value.split(',');
+            const features = parameters.slice(0, -1);
+            const target = parameters[parameters.length - 1];
+            
+            const createdDate = new Date(metrics.created_at);
+            const formattedDate = createdDate.toLocaleDateString('id-ID', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+            const formattedTime = createdDate.toLocaleTimeString('id-ID');
+        
+            const metricCards = [
+                {
+                    icon: 'fa-calendar',
+                    title: 'Dibuat',
+                    value: `${formattedDate} ${formattedTime}`
+                },
+                {
+                    icon: 'fa-clock',
+                    title: 'Waktu Pembangunan',
+                    value: `${metrics.build_time.toFixed(2)}d`
+                },
+                {
+                    icon: 'fa-list',
+                    title: 'Fitur',
+                    value: `${features.join(', ')}`
+                },
+                {
+                    icon: 'fa-bullseye',
+                    title: 'Variabel Target',
+                    value: target
+                }
+            ];
+        
+            let html = metricCards.map(card => `
+                <div class="metric-card">
+                    <div class="flex items-center gap-2">
+                        <i class="fas ${card.icon} text-primary-color"></i>
+                        <span class="text-sm font-medium">${card.title}</span>
+                    </div>
+                    <div class="metric-value">${card.value}</div>
+                </div>
+            `).join('');
+        
+            if (metrics.feature_importance) {
+                html += `
+                    <div class="metric-card col-span-full">
+                        <div class="flex items-center gap-2 mb-3">
+                            <i class="fas fa-chart-pie text-primary-color"></i>
+                            <span class="text-lg font-semibold">Kepentingan Fitur</span>
+                        </div>
+                        <div class="grid gap-2">
+                            ${Object.entries(metrics.feature_importance)
+                                .sort((a, b) => b[1] - a[1])
+                                .map(([feature, value]) => `
+                                    <div class="flex items-center gap-2">
+                                        <div class="flex-grow text-sm">${feature}</div>
+                                        <div class="font-medium text-sm">${(value * 100).toFixed(1)}%</div>
+                                        <div class="w-24 h-2 bg-gray-200 rounded-full">
+                                            <div class="feature-importance-bar" 
+                                                style="width: ${value * 100}%"></div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+        
+            metricsContainer.innerHTML = html;
+        
+            if (metrics.feature_importance) {
+                initFeatureImportanceChart(metrics.feature_importance);
+            }
+        }
+
+        // Tambahkan fungsi untuk ekspor hasil ke PDF
+        function exportToPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Tambahkan judul
+            doc.setFontSize(20);
+            doc.text('Laporan Pohon Keputusan', 105, 15, null, null, 'center');
+
+            // Tambahkan gambar pohon
+            const treeImg = document.getElementById('treeVisualization');
+            doc.addImage(treeImg.src, 'PNG', 10, 30, 190, 100);
+
+            // Tambahkan metrik
+            doc.setFontSize(14);
+            doc.text('Metrik Pohon:', 10, 140);
+            const metrics = document.getElementById('metrics').textContent;
+            doc.setFontSize(12);
+            doc.text(metrics, 10, 150);
+
+            // Tambahkan log pembangunan
+            doc.addPage();
+            doc.setFontSize(14);
+            doc.text('Log Pembangunan:', 10, 10);
+            const logs = document.getElementById('buildLogs').textContent;
+            doc.setFontSize(10);
+            doc.text(logs, 10, 20);
+
+            // Simpan PDF
+            doc.save('laporan-pohon-keputusan.pdf');
+        }
+
+        // Tambahkan tombol ekspor ke PDF
+        const exportButton = document.createElement('button');
+        exportButton.textContent = 'Ekspor ke PDF';
+        exportButton.classList.add('btn', 'btn-secondary', 'mt-4', 'ml-2');
+        exportButton.onclick = exportToPDF;
+        header.appendChild(exportButton);
+    </script>
+</body>
+</html>
