@@ -41,6 +41,9 @@
             --text-primary: #2c3e50;
             --text-secondary: #7f8c8d;
             --background-light: #ecf0f1;
+            --background-dark: #2c3e50;
+            --card-bg-light: #ffffff;
+            --card-bg-dark: #34495e;
         }
 
         /* Gaya Dasar */
@@ -51,28 +54,28 @@
             overflow-x: hidden;
             color: var(--text-primary);
             line-height: 1.6;
-            transition: background 0.3s ease;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         /* Kontainer Aplikasi */
         .app-container {
             max-width: 1440px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1rem;
             position: relative;
         }
 
         /* Gaya Header */
         .page-header {
             background: var(--brand-gradient);
-            padding: 4rem 2rem;
-            margin: 0 auto 2rem auto;
+            padding: 2rem 1rem;
+            margin: 0 auto 1rem auto;
             color: white;
             position: relative;
             overflow: hidden;
-            border-radius: 1rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            max-width: 1440px;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 100%;
             width: 100%;
         }
 
@@ -91,10 +94,10 @@
 
         .app-title {
             font-family: 'Merriweather', serif;
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             font-weight: 700;
             line-height: 1.2;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             position: relative;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
@@ -105,8 +108,8 @@
             bottom: -0.5rem;
             left: 50%;
             transform: translateX(-50%);
-            width: 120px;
-            height: 4px;
+            width: 80px;
+            height: 3px;
             background: white;
             border-radius: 2px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -114,49 +117,49 @@
 
         /* Gaya Kartu */
         .card {
-            background: white;
+            background: var(--card-bg-light);
             border: none;
-            border-radius: 1rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             overflow: hidden;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
         .card-header {
             background: rgba(248, 250, 252, 0.8);
             border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-            padding: 1.5rem;
+            padding: 1rem;
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.5rem;
         }
 
         .card-header-icon {
-            width: 48px;
-            height: 48px;
+            width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: var(--brand-gradient);
             color: white;
-            border-radius: 0.75rem;
-            font-size: 1.5rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+            font-size: 1.25rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         /* Kontrol Formulir */
         .form-control {
             font-family: 'Poppins', sans-serif;
-            border-radius: 0.75rem;
+            border-radius: 0.5rem;
             border: 2px solid #e2e8f0;
-            padding: 1rem 1.25rem;
-            font-size: 1rem;
+            padding: 0.75rem 1rem;
+            font-size: 0.875rem;
             transition: all 0.3s ease;
             background: white;
             width: 100%;
@@ -164,20 +167,20 @@
 
         .form-control:focus {
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 4px rgba(39, 174, 96, 0.1);
+            box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.1);
             outline: none;
         }
 
         /* Grup Input */
         .input-group {
             position: relative;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .input-group label {
             display: block;
-            margin-bottom: 0.5rem;
-            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+            font-size: 0.75rem;
             font-weight: 600;
             color: var(--text-secondary);
             transition: all 0.3s ease;
@@ -193,8 +196,8 @@
         .btn {
             font-family: 'Poppins', sans-serif;
             font-weight: 600;
-            padding: 0.875rem 1.75rem;
-            border-radius: 0.75rem;
+            padding: 0.625rem 1.25rem;
+            border-radius: 0.5rem;
             transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
@@ -202,6 +205,7 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            font-size: 0.875rem;
         }
 
         .btn::after {
@@ -246,11 +250,11 @@
 
         /* Kontainer Pohon */
         .tree-container {
-            height: 600px;
+            height: 400px;
             background: white;
             border: 2px solid #e2e8f0;
-            border-radius: 1rem;
-            padding: 1.5rem;
+            border-radius: 0.5rem;
+            padding: 1rem;
             position: relative;
             overflow: hidden;
             box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
@@ -268,22 +272,22 @@
 
         .tree-controls {
             position: absolute;
-            bottom: 1.5rem;
-            right: 1.5rem;
+            bottom: 1rem;
+            right: 1rem;
             display: flex;
-            gap: 0.75rem;
+            gap: 0.5rem;
             background: rgba(255, 255, 255, 0.9);
-            padding: 0.75rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(8px);
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(4px);
         }
 
         .tree-controls button {
             background: white;
             border: none;
-            padding: 0.5rem;
-            border-radius: 0.5rem;
+            padding: 0.25rem;
+            border-radius: 0.25rem;
             cursor: pointer;
             transition: all 0.3s ease;
         }
@@ -296,30 +300,30 @@
         /* Grid Metrik */
         .metrics-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
         }
 
         .metric-card {
             background: white;
-            padding: 1.5rem;
-            border-radius: 0.75rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 0.5rem;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .metric-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
         }
 
         .metric-value {
             font-family: 'Merriweather', serif;
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: 600;
             color: var(--primary-color);
         }
@@ -327,24 +331,24 @@
         /* Kontainer Log */
         .logs-container {
             background: #2c3e50;
-            border-radius: 0.75rem;
-            padding: 1.5rem;
+            border-radius: 0.5rem;
+            padding: 1rem;
             font-family: 'Roboto Mono', monospace;
             position: relative;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
         }
 
         .logs-content {
-            max-height: 400px;
+            max-height: 300px;
             overflow-y: auto;
             color: #ecf0f1;
-            font-size: 0.875rem;
+            font-size: 0.75rem;
             line-height: 1.6;
         }
 
         .log-entry {
             margin: 0.25rem 0;
-            padding: 0.5rem;
+            padding: 0.25rem;
             border-bottom: 1px solid #34495e;
             font-family: 'Roboto Mono', monospace;
             animation: fadeIn 0.3s ease-out;
@@ -369,12 +373,12 @@
         .log-timestamp {
             color: #95a5a6;
             margin-right: 0.5rem;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
         }
 
         .feature-importance-bar {
             background: var(--brand-gradient);
-            height: 0.5rem;
+            height: 0.375rem;
             border-radius: 9999px;
             transition: width 1s ease-out, background 0.3s ease;
         }
@@ -388,14 +392,14 @@
             position: fixed;
             bottom: 1rem;
             right: 1rem;
-            padding: 1rem;
-            border-radius: 0.5rem;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
             background: white;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-                        0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
+                        0 2px 4px rgba(0, 0, 0, 0.06);
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 0.5rem;
             z-index: 50;
             opacity: 0;
             visibility: hidden;
@@ -468,11 +472,11 @@
         /* Desain Responsif */
         @media (max-width: 768px) {
             .app-container {
-                padding: 1rem;
+                padding: 0.5rem;
             }
 
             .app-title {
-                font-size: 2.5rem;
+                font-size: 2rem;
             }
 
             .metrics-grid {
@@ -480,13 +484,13 @@
             }
 
             .tree-controls {
-                bottom: 1rem;
-                right: 1rem;
-                padding: 0.5rem;
+                bottom: 0.5rem;
+                right: 0.5rem;
+                padding: 0.25rem;
             }
 
             .card {
-                margin-bottom: 1rem;
+                margin-bottom: 0.5rem;
             }
         }
 
@@ -498,7 +502,7 @@
             }
 
             .card {
-                background: rgba(52, 73, 94, 0.9);
+                background: var(--card-bg-dark);
             }
 
             .form-control {
@@ -520,6 +524,38 @@
             .metric-card {
                 background: #34495e;
             }
+
+            .tree-container {
+                background: #2c3e50;
+                border-color: #34495e;
+            }
+
+            .tree-controls {
+                background: rgba(52, 73, 94, 0.9);
+            }
+
+            .tree-controls button {
+                background: #34495e;
+                color: #ecf0f1;
+            }
+
+            .tree-controls button:hover {
+                background: #2c3e50;
+            }
+
+            .toast {
+                background: #34495e;
+                color: #ecf0f1;
+            }
+
+            .loading-overlay {
+                background: rgba(44, 62, 80, 0.9);
+            }
+
+            .loading-spinner {
+                border-color: #34495e;
+                border-top-color: var(--primary-color);
+            }
         }
 
         /* Gaya Tabel */
@@ -527,7 +563,7 @@
             max-height: 300px;
             overflow-y: auto;
             margin-top: 1rem;
-            border-radius: 0.5rem;
+            border-radius: 0.375rem;
             background: white;
             border: 1px solid #e2e8f0;
         }
@@ -535,7 +571,7 @@
         .data-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.875rem;
+            font-size: 0.75rem;
         }
 
         .data-table th {
@@ -544,18 +580,18 @@
             background: var(--brand-gradient);
             color: white;
             text-align: left;
-            padding: 0.75rem 1rem;
+            padding: 0.5rem 0.75rem;
             font-weight: 600;
             z-index: 10;
         }
 
         .data-table th:first-child {
             text-align: center;
-            width: 50px;
+            width: 40px;
         }
 
         .data-table td {
-            padding: 0.75rem 1rem;
+            padding: 0.5rem 0.75rem;
             border-bottom: 1px solid #e2e8f0;
         }
 
@@ -563,7 +599,7 @@
             background-color: #f8fafc;
             font-weight: 500;
             text-align: center;
-            width: 50px;
+            width: 40px;
         }
 
         .data-table tbody tr:hover {
@@ -580,14 +616,14 @@
 
         .footer {
             background: var(--brand-gradient);
-            padding: 1.5rem 2rem;
-            margin: 2rem auto 0 auto;
+            padding: 1rem;
+            margin: 1rem auto 0 auto;
             color: white;
             position: relative;
             overflow: hidden;
-            border-radius: 1rem;
-            box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1), 0 -2px 4px -1px rgba(0, 0, 0, 0.06);
-            max-width: 1440px;
+            border-radius: 0.5rem;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 100%;
             width: 100%;
             display: flex;
             justify-content: center;
@@ -599,14 +635,14 @@
             justify-content: center;
             position: relative;
             z-index: 1;
-            gap: 2rem;
+            gap: 1rem;
             margin: 0;
             padding: 0;
         }
 
         .footer-text {
             font-family: 'Merriweather', serif;
-            font-size: 1rem;
+            font-size: 0.875rem;
             font-weight: 500;
             margin: 0;
             padding: 0;
@@ -615,14 +651,14 @@
 
         .social-links {
             display: flex;
-            gap: 1.5rem;
+            gap: 1rem;
             margin: 0;
             padding: 0;
         }
 
         .social-link {
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             transition: all 0.3s ease;
             opacity: 0.8;
             margin: 0;
@@ -639,7 +675,7 @@
         @media (max-width: 768px) {
             .footer-content {
                 flex-direction: column;
-                gap: 1rem;
+                gap: 0.5rem;
                 text-align: center;
             }
             
@@ -661,8 +697,8 @@
 
         .leaf {
             position: absolute;
-            width: 20px;
-            height: 20px;
+            width: 15px;
+            height: 15px;
             background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%2327ae60" d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"/></svg>') no-repeat center center;
             animation: falling 5s infinite linear;
         }
@@ -697,11 +733,72 @@
         .tippy-box[data-theme~='nature'][data-placement^='right'] > .tippy-arrow::before {
             border-right-color: #27ae60;
         }
+
+        /* Penyesuaian untuk Mode Gelap */
+        @media (prefers-color-scheme: dark) {
+            .data-table {
+                background-color: #2c3e50;
+                color: #ecf0f1;
+            }
+
+            .data-table th {
+                background: var(--dark-surface-gradient);
+            }
+
+            .data-table td:first-child,
+            .data-table tbody tr:nth-child(even) {
+                background-color: #34495e;
+            }
+
+            .data-table tbody tr:hover,
+            .data-table tbody tr:nth-child(even):hover {
+                background-color: #2c3e50;
+            }
+
+            .table-container {
+                background: #34495e;
+                border-color: #2c3e50;
+            }
+
+            .toast {
+                background: #34495e;
+                color: #ecf0f1;
+            }
+
+            .loading-overlay {
+                background: rgba(44, 62, 80, 0.9);
+            }
+
+            .loading-spinner {
+                border-color: #34495e;
+                border-top-color: var(--primary-color);
+            }
+
+            .tippy-box[data-theme~='nature'] {
+                background-color: #2ecc71;
+            }
+
+            .tippy-box[data-theme~='nature'][data-placement^='top'] > .tippy-arrow::before {
+                border-top-color: #2ecc71;
+            }
+
+            .tippy-box[data-theme~='nature'][data-placement^='bottom'] > .tippy-arrow::before {
+                border-bottom-color: #2ecc71;
+            }
+
+            .tippy-box[data-theme~='nature'][data-placement^='left'] > .tippy-arrow::before {
+                border-left-color: #2ecc71;
+            }
+
+            .tippy-box[data-theme~='nature'][data-placement^='right'] > .tippy-arrow::before {
+                border-right-color: #2ecc71;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="app-container">
-        <header class="page-header text-center mb-6">
+        <header class="page-header text-center mb-4">
             <h1 class="app-title animate__animated animate__fadeInDown">
                 🌳 Pohon Keputusan Pintar
             </h1>
@@ -710,17 +807,17 @@
             </p>
         </header>
 
-        <main class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <main class="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <!-- Kolom Kiri -->
-            <div class="space-y-6">
+            <div class="space-y-4">
                 <!-- Kartu Dataset -->
                 <div class="card p-4" data-aos="fade-up">
-                    <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
+                    <h2 class="text-xl font-semibold mb-3 flex items-center gap-2">
                         <i class="fas fa-database text-primary-color"></i>
                         Dataset
                     </h2>
-                    <div class="flex justify-between mb-4">
-                        <div class="flex items-center gap-2 flex-grow mr-2">
+                    <div class="flex flex-wrap justify-between mb-3">
+                        <div class="flex items-center gap-2 flex-grow mr-2 mb-2 sm:mb-0">
                             <label for="datasetName" class="font-medium">NAMA DATASET:</label>
                             <input type="text" id="datasetName" class="form-control" data-tippy-content="Masukkan nama unik untuk dataset Anda">
                         </div>
@@ -737,7 +834,7 @@
                             {% endfor %}
                         </select>
                     </div>
-                    <div class="flex justify-end mt-4">
+                    <div class="flex justify-end mt-3">
                         <button onclick="updateDataset()" class="btn btn-secondary mr-2" data-tippy-content="Perbarui dataset yang dipilih">
                             <i class="fas fa-edit"></i> Perbarui
                         </button>
@@ -749,7 +846,7 @@
 
                 <!-- Kartu Parameter -->
                 <div class="card p-4" data-aos="fade-up" data-aos-delay="100">
-                    <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
+                    <h2 class="text-xl font-semibold mb-3 flex items-center gap-2">
                         <i class="fas fa-cogs text-primary-color"></i>
                         Parameter
                     </h2>
@@ -766,17 +863,17 @@
 
                 <!-- Kartu Data Pelatihan -->
                 <div class="card p-4" data-aos="fade-up" data-aos-delay="200">
-                    <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
+                    <h2 class="text-xl font-semibold mb-3 flex items-center gap-2">
                         <i class="fas fa-table text-primary-color"></i>
                         Data Pelatihan
                     </h2>
                     <div class="input-group">
                         <label for="trainingData">Dataset Pelatihan:</label>
-                        <textarea id="trainingData" rows="8" class="form-control custom-scrollbar"
+                        <textarea id="trainingData" rows="6" class="form-control custom-scrollbar"
                             placeholder="Masukkan satu data per baris, dipisahkan koma"
                             data-tippy-content="Masukkan data pelatihan Anda di sini. Satu baris untuk setiap data."></textarea>
                     </div>
-                    <div class="flex justify-between mt-4">
+                    <div class="flex justify-between mt-3">
                         <button onclick="buildTree()" class="btn btn-primary" data-tippy-content="Mulai membangun pohon keputusan">
                             <i class="fas fa-play"></i>
                             Bangun Pohon
@@ -789,7 +886,7 @@
                 </div>
                 <!-- Kartu Pratinjau Data -->
                 <div class="card p-4" data-aos="fade-up" data-aos-delay="300">
-                    <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
+                    <h2 class="text-xl font-semibold mb-3 flex items-center gap-2">
                         <i class="fas fa-eye text-primary-color"></i>
                         Pratinjau Data
                     </h2>
@@ -809,10 +906,10 @@
             </div>
 
             <!-- Kolom Kanan -->
-            <div class="space-y-6">
+            <div class="space-y-4">
                 <!-- Kartu Visualisasi Pohon -->
                 <div class="card p-4" data-aos="fade-up">
-                    <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
+                    <h2 class="text-xl font-semibold mb-3 flex items-center gap-2">
                         <i class="fas fa-project-diagram text-primary-color"></i>
                         Visualisasi Pohon
                     </h2>
@@ -837,7 +934,7 @@
 
                 <!-- Kartu Metrik -->
                 <div class="card p-4" data-aos="fade-up" data-aos-delay="100">
-                    <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
+                    <h2 class="text-xl font-semibold mb-3 flex items-center gap-2">
                         <i class="fas fa-chart-bar text-primary-color"></i>
                         Metrik Pohon
                     </h2>
@@ -848,7 +945,7 @@
 
                 <!-- Kartu Log Pembangunan -->
                 <div class="card p-4" data-aos="fade-up" data-aos-delay="200">
-                    <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
+                    <h2 class="text-xl font-semibold mb-3 flex items-center gap-2">
                         <i class="fas fa-terminal text-primary-color"></i>
                         Log Pembangunan
                     </h2>
@@ -1724,13 +1821,6 @@
             // Simpan PDF
             doc.save('laporan-pohon-keputusan.pdf');
         }
-
-        // Tambahkan tombol ekspor ke PDF
-        const exportButton = document.createElement('button');
-        exportButton.textContent = 'Ekspor ke PDF';
-        exportButton.classList.add('btn', 'btn-secondary', 'mt-4', 'ml-2');
-        exportButton.onclick = exportToPDF;
-        header.appendChild(exportButton);
     </script>
 </body>
 </html>
